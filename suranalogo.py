@@ -34,12 +34,7 @@ def proxima_pagina(soup):
         return
 
 
-# def peliculas():
-#     categorias = [f'{url}/pelicula-b/n-35mm/',
-#                   f'{url}/pelicula-b/n-format0-120/',
-#                   f'{url}/cargas/',
-#                   f'{url}/pelicula-35mm/color-35mm/']
-#     # for link in soup.find_all('li', class_='nav-item'):
+
 
 
 def getInfo(url):
@@ -84,17 +79,8 @@ while True:
     if not url:
         break
 
-# print(peliculas_35mm_paginas)
-# print(rollos_35mm)
-
 df = pd.DataFrame(rollos_35mm)
-# print(df.head())
+
 
 df.to_csv('surnanalogo-35mm.csv')
 
-while True:
-    string = input()
-    findOnArray(string)
-    print(result)
-
-    result = []
