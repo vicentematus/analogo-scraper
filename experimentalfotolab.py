@@ -3,18 +3,21 @@ import requests
 from urllib.request import urlopen, Request
 import csv
 import sys
+
+from requests_html import HTMLSession
 print('Imprimiendo productos de experimental fotolab')
 
 
-url = requests.get(
-    "https://experimentalfotolab.cl/categoria-producto/rollos-blanco-y-negro/").text
-soup = BeautifulSoup(url, 'html.parser')
+baseURL = "https://experimentalfotolab.cl/"
 
-file = open('experimentalfotolab.csv', 'w', newline='')
-writer = csv.writer(file)
-writer.writerow(["Nombre", "Precio", "Stock"])
+session = HTMLSession()
 
-rollos = soup.find_all('li', class_="has-product-nav")
+
+def getdata(url):
+    r = session.get(url)
+    soup = BeautifulSoup(r.text, 'html.parser')
+    return soup
+
 
 for rollo in rollos:
 
@@ -25,8 +28,3 @@ for rollo in rollos:
         stock = "FALSE"
     else:
         stock = "TRUE"
-    writer.writerow(
-        [nombre, precio, stock])
-
-
-file.close()
